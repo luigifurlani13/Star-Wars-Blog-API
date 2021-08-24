@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, People, Vehicles, Starships
 #from models import Person
 
 app = Flask(__name__)
@@ -32,40 +32,49 @@ def sitemap():
 
 @app.route('/user', methods=['GET'])
 def handle_hello():
+    users = User.query.all()
+    all_users = list(map(lambda user: user.serialize(), users))
+    
+    return jsonify(all_users), 200
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
-
-    return jsonify(response_body), 200
-
-@app.route('/people/', methods=['GET'])
+@app.route('/people', methods=['GET'])
 def get_people():
+    people = People.query.all()
+    all_people = list(map(lambda person: person.serialize(), people))
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
-
-    return jsonify(response_body), 200
+    return jsonify(all_people), 200
 
 @app.route('/people/<int:people_id>', methods=['GET'])
 def get_single_people():
+    single_person = People.query.get(people_id)
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+    return jsonify(single_person), 200
 
-    return jsonify(response_body), 200
+@app.route('/vehicles', methods=['GET'])
+def get_vehicles():
+    vehicles = Vehicles.query.all()
+    all_vehicles = list(map(lambda vehicle: vehicle.serialize(), vehicles))
 
-@app.route('/vehicle/', methods=['GET'])
-def get_vehicle():
-   
+    return jsonify(all_vehicles), 200
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+@app.route('/vehicles/<int:vehicle_id>', methods=['GET'])
+def get_single_vehicle():
+    single_vehicle = Vehicles.query.get(vehicle_id)
 
-    return jsonify(response_body), 200
+    return jsonify(single_vehicle), 200
+
+@app.route('/starships', methods=['GET'])
+def get_starships():
+    starships = Starships.query.all()
+    all_starships = list(map(lambda starship: starship.serialize(), starships))
+
+    return jsonify(all_people), 200
+
+@app.route('/people/<int:starship_id>', methods=['GET'])
+def get_single_starship():
+    single_starship = Starships.query.get(starship_id)
+
+    return jsonify(single_person), 200
 
 
 # this only runs if `$ python src/main.py` is executed

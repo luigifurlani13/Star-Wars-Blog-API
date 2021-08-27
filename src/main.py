@@ -68,13 +68,13 @@ def get_starships():
     starships = Starships.query.all()
     all_starships = list(map(lambda starship: starship.serialize(), starships))
 
-    return jsonify(all_people), 200
+    return jsonify(all_starships), 200
 
 @app.route('/people/<int:starship_id>', methods=['GET'])
 def get_single_starship():
     single_starship = Starships.query.get(starship_id)
 
-    return jsonify(single_person), 200
+    return jsonify(single_starship), 200
 
 
 # this only runs if `$ python src/main.py` is executed

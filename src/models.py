@@ -24,11 +24,11 @@ class People(db.Model):
     name = db.Column(db.String(120), unique=True, nullable=False)
     height = db.Column(db.String(120), unique=True, nullable=False)
     mass = db.Column(db.String(120), unique=True, nullable=False)
-    hair_color = db.Column(db.String(120), unique=True, nullable=False)
+    hair_color = db.Column(db.String(120), unique=False, nullable=False)
     skin_color = db.Column(db.String(120), unique=True, nullable=False)
     eye_color = db.Column(db.String(120), unique=True, nullable=False)
     birth_year = db.Column(db.String(120), unique=True, nullable=False)
-    gender = db.Column(db.String(120), unique=True, nullable=False)
+    gender = db.Column(db.String(120), unique=False, nullable=False)
 
     def serialize(self):
         return {

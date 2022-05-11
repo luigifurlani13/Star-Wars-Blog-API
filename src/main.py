@@ -48,7 +48,7 @@ def get_people():
 def get_single_people():
     single_person = People.query.get(people_id)
 
-    return jsonify(single_person), 200
+    return jsonify(single_person.serialize()), 200
 
 @app.route('/vehicles', methods=['GET'])
 def get_vehicles():
@@ -61,7 +61,7 @@ def get_vehicles():
 def get_single_vehicle():
     single_vehicle = Vehicles.query.get(vehicle_id)
 
-    return jsonify(single_vehicle), 200
+    return jsonify(single_vehicle.serialize()), 200
 
 @app.route('/starships', methods=['GET'])
 def get_starships():
@@ -70,11 +70,11 @@ def get_starships():
 
     return jsonify(all_starships), 200
 
-@app.route('/people/<int:starship_id>', methods=['GET'])
+@app.route('/starships/<int:starship_id>', methods=['GET'])
 def get_single_starship():
     single_starship = Starships.query.get(starship_id)
 
-    return jsonify(single_starship), 200
+    return jsonify(single_starship.serialize()), 200
 
 
 # this only runs if `$ python src/main.py` is executed
